@@ -13,6 +13,10 @@ import path from "path";
 //config file
 dotenv.config();
 
+//resolving dirname for es module
+const _filename = fileURLToPath(import.meta.url);
+const _dirname = path.dirname(_filename);
+
 //connect database
 connectDB();
 
@@ -31,9 +35,7 @@ app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/category", categoryRoutes);
 app.use("/api/v1/product", productRoutes);
 
-//resolving dirname for es module
-const _filename = fileURLToPath(import.meta.url);
-const _dirname = path.dirname(_filename);
+
 
 // use the client app
 app.use(express.static(path.join(_dirname, "./client/dist")));
