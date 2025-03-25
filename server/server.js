@@ -36,11 +36,11 @@ const _filename = fileURLToPath(import.meta.url);
 const _dirname = path.dirname(_filename);
 
 // use the client app
-app.use(express.static(path.join(_dirname, "./client/dist")));
+app.use(express.static(path.join(_dirname, "../client/dist")));
 
 // Render client for any path
 app.get("*", (req, res) => {
-  res.sendFile(path.join(_dirname, "./client/dist", "index.html"));
+  res.sendFile(path.join(_dirname, "../client/dist", "index.html"));
 });
 
 //rest api
