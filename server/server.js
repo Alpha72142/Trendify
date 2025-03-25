@@ -7,6 +7,8 @@ import authRoutes from "./routes/authRoute.js";
 import categoryRoutes from "./routes/categoryRoute.js";
 import productRoutes from "./routes/productRoutes.js";
 import cors from "cors";
+import { fileURLToPath } from "url";
+import path from "path";
 
 //config file
 dotenv.config();
@@ -16,6 +18,18 @@ connectDB();
 
 //rest object
 const app = express();
+
+//resolving dirname for es module
+const _filename = fileURLToPath(import.meta.url);
+const _dirname = path.dirname(_filename);
+
+// use the client app
+app.use(express.static(path.join(_dirname, "./client/dist")));
+
+// Render client for any path
+app.get("*", (req, res) => {
+  res.sendFile(path.join(_dirname, "./client/dist/index.html"));
+});
 
 //middleware
 // app.use(express.json());
